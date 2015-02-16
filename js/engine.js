@@ -81,6 +81,7 @@ var Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
         // checkCollisions();
+
     }
 
     /* This is called by the update function  and loops through all of the
@@ -161,8 +162,12 @@ var Engine = (function(global) {
      */
     function reset() {
         // noop
+        // console.log("run reset"); //test running reset func
     }
 
+    function test(){
+        console.log("test!");
+    }
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
