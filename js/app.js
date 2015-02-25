@@ -54,12 +54,36 @@ Player.prototype.render = function(){
 }
 
 Player.prototype.handleInput = function(key){
-    if (key === 'left') {
-        this.x -= 100;
-    };
-    if (key === 'up') {};
-    if (key === 'right') {};
-    if (key === 'down') {};
+    switch(key){
+        case "left":
+        if (this.x > 0) {
+            this.x -= 100;
+        }
+        else {
+            this.x = 400;
+        }
+        break;
+        case "right":
+        if (this.x > 390) {
+            this.x = 0;
+        }
+        else {
+            this.x += 100 ;
+        }
+        break;
+        case "up":
+        if (this.y <= -10) {
+            this.y = 400;
+        }
+        else this.y -= 82;
+        break;
+        case "down":
+        if (this.y == 400) {
+            this.y = 400;
+        }
+        else this.y += 82;
+        break;
+    }
 }
 
 // Now instantiate your objects.
