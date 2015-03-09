@@ -1,0 +1,11 @@
+* {
+    font-family: 'Droid Sans', sans-serif;
+}
+body {
+    text-align: center;
+}
+
+.gameinfo {
+    padding-top: 155px;
+    font-size: 30px;
+}
