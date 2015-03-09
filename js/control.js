@@ -1,5 +1,6 @@
 
-//gamelevel is determined by speed.
+//game score init
+var score = 0;
 
 //generate a random number
 function randomNumber(a){
@@ -8,5 +9,5 @@ function randomNumber(a){
     return num;
 }
 
-// achievement info display
-// $('.col-md-4').append("<div class='text-center achievement'>Achievement</div>");
+$('.col-md-4').append("<div class='gameinfo'></div>");
+$('.gameinfo').append("<p>Use arrow key to control the player and watch out the bugs who can bite you</p>");

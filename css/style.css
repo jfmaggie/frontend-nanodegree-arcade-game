@@ -5,6 +5,7 @@ body {
     text-align: center;
 }
 
-.achievement {
-    padding-top: 50px;
+.gameinfo {
+    padding-top: 155px;
+    font-size: 30px;
 }

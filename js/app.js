@@ -1,6 +1,6 @@
 
 //app ramdom pick the number of enemies
-var enemyTotal = randomNumber(20);
+var enemyTotal = randomNumber(10);
 
 // Enemies our player must avoid
 var Enemy = function() {
@@ -99,6 +99,7 @@ Player.prototype.handleInput = function(key){
         this.y = 400;
     }else {
         player.reset();
+        //score(score);
     }
 };
 
