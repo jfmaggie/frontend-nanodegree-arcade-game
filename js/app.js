@@ -3,36 +3,34 @@
 var enemyTotal = randomNumber(20);
 
 // Enemies our player must avoid
-var Enemy = function(x, y) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+var Enemy = function() {
+    // The image/sprite for our enemies
     this.sprite = 'images/enemy-bug.png';
-    this.x = x;
-    this.y = y;
-    this.left = this.x;
-    this.right = this.x + 50;
-    this.top = this.y - 50;
-    this.bottom = this.y;
+    this.x = -50;
+    this.yPosition = [60, 140, 220];
+    this.y = this.yPosition[Math.floor(Math.random() * this.yPosition.length)];
+    this.speed = Math.random() * 100 + 100;
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+// Update the enemy's position
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-    this.x += 100 * dt;
+
+    this.x += this.speed * dt;
+
     //keep enemies in the canvas
     if (this.x >= 500){
-        this.x = 0;
+        this.x = -50;
+        this.y = this.yPosition[Math.floor(Math.random() * this.yPosition.length)];
     }
+
+    // the bound of enemy
+    this.left = this.x;
+    this.right = this.x + 50;
+    this.top = this.y;
+    this.bottom = this.y + 50;
 
     if(checkCollisions(player, this)){
         player.reset();
-        //console.log(this.left, this.right,this.top, this.bottom);
     }
 
     //console.log(this.left, this.right,this.top, this.bottom);
@@ -44,8 +42,10 @@ Enemy.prototype.render = function() {
 };
 
 function checkCollisions(player, enemy) {
-    return !(player.left >= enemy.right || player.right <= enemy.left ||
-        player.top >= enemy.bottom || player.bottom <= enemy.top);
+    return !(player.left >= enemy.right ||
+            player.right <= enemy.left ||
+            player.top >= enemy.bottom ||
+            player.bottom <= enemy.top);
 }
 
 Enemy.prototype.checkCollisions = function(){
@@ -71,8 +71,8 @@ Player.prototype.update = function(){
     //player needs to be reset to init position
     this.left = this.x;
     this.right = this.x + 50;
-    this.top = this.y - 50;
-    this.bottom = this.y;
+    this.top = this.y;
+    this.bottom = this.y + 50;
 
     //console.log(this.left, this.right,this.top, this.bottom);
 };
@@ -82,44 +82,23 @@ Player.prototype.render = function(){
 };
 
 Player.prototype.handleInput = function(key){
-    switch(key){
-        case "left":
-        if (this.x > 0) {
-            this.x -= 100;
-        }
-        else {
-            this.x = 0;
-        }
-        break;
-        case "right":
-        if (this.x > 390) {
-            this.x = 400;
-        }
-        else {
-            this.x += 100 ;
-        }
-        break;
-        case "up":
-
-        if (this.y < 73) {
-            //in this scenario, player wins
-             //get score and upgrade to next level
-
-            // invoke congrats messages
-
-            //reset to init location
-            this.x = 200;
-            this.y = 400;
-
-        }
-        else this.y -= 82;
-        break;
-        case "down":
-        if (this.y == 400) {
-            this.y = 400;
-        }
-        else this.y += 82;
-        break;
+    //move player inside the canvas
+    if (key == "left" && this.x > 0) {
+        this.x -= 100;
+    }else if (key == "left" && this.x == 0) {
+        this.x = 0;
+    }else if (key == "right" && this.x < 400) {
+        this.x += 100;
+    }else if (key == "right" && this.x == 400) {
+        this.x = 400;
+    }else if (key == "up" && this.y >=73) {
+        this.y -= 82;
+    }else if (key == "down" && this.y < 400) {
+        this.y += 82;
+    }else if (key == "down" && this.y == 400) {
+        this.y = 400;
+    }else {
+        player.reset();
     }
 };
 
@@ -131,15 +110,14 @@ var allEnemies = [],
 
 //create at least 3 enemies
 var creatEnemy = function() {
+
     if (!enemyTotal) {
        enemyTotal = 1;
        creatEnemy();
     }
    else {
         for (var i = 0; i < enemyTotal; i++) {
-            allEnemies.push(new Enemy(0, 60));
-            allEnemies.push(new Enemy(100, 140));
-            allEnemies.push(new Enemy(300, 220));
+            allEnemies.push(new Enemy());
         }
     }
 }();
