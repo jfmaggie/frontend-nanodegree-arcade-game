@@ -1,6 +1,12 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+jQuery and Bootstrap are helping make game responsive.
+Game objects are implemneted with JS OOP features.
+Game introduction is to be continued.
 
-for self-checking their submission.
+Resources
+[jQuery]http://jquery.com/
+[Bootstrap]http://getbootstrap.com/
+[Udacity forum]http://discussions.udacity.com/t/check-collision/8676
+ 
